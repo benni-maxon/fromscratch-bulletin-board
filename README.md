@@ -1,84 +1,104 @@
-# NAME OF APPLICATION
+# From Scratch Bulletin Board Plan
 
-_One or two sentence description of application_
+1. Database Setup
 
-_example:_
+-   Add a new table called posts
+-   Add three columns (title, description, contact) plus any others you want to include. Can all be varchars.
+-   Copy your key / url into your fetch-utils and add your client code
 
-Web application that retrieves and sorts a list of cartoon dogs from a remote database
+```js
+const SUPABASE_URL = '';
+const SUPABASE_KEY = '';
 
-## Wireframe
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+```
 
-_Put an image of your wireframe here._
+-   Add some rows for testing
+-   Enable row level security
 
-## Make a plan of attack
+2. Posts Page
 
--   list things out in plain English/pseudocode; no need to specify ids, for example
+-   TDD a render function for displaying your post information
+-   Add your fetchPosts to fetch-utils.js
+-   Add your policy for selecting data (allow all users)
 
-_example:_
+```js
+export async function fetchPosts() {
+    const response = await client.from('posts').select('*');
 
-1. Write HTML elements, label with IDs
-2. Make page layout with CSS
-3. Grab HTML elements with `getElementById()`, store in JS variables
-4. etc...
+    return response.data;
+}
+```
 
-## HTML elements (stuff present upon page load)
+_Validation step: console.log your results to make sure you're getting the data back from the database_
 
--   doesn't need to be absolutely every html element on the page
-    -   can just be stuff on page that user will have to interact with and you'll have to grab in `app.js`
+-   Add an async loadData function that you will call immediately to load the data, loop through and render each item on the page
 
-_example:_
+3. Auth page
+   _don't worry about redirects at first_
 
--   Form containing user text input and submit button
--   Flexbox div that will contain displayed list of dogs
+-   Add your sign up form
+-   Add your signUpUser function to fetchUtils
+-   Add event listener to form submit
+-   Call function and ensure you get a user back from supabase
+-   repeat for sign IN
+-   Add your redirects
 
-## State (everything you need to track internally using JS variables)
+4. Create Page
 
--   counters, user data that's been entered, stuff fetched from external databases, etc
--   generally, any JS variables that exist in the global scope in `app.js` go here
+-   Add your create folder, index.html, and create.js
+-   Add a form for posts in your index.html
+-   Add form event listener, use FormData to get your data from your form
+-   Validation step: console.log your FormData to make sure you're getting the info correctly
+-   Add createPost to your fetch-utils.js
+    export async function createNewPost(post) {
 
-_example:_
+    ```js
+      const response = await client.from('posts').insert(post);
+      if (response.data) {
+          return response.data;
+      } else {
+          console.error(response.error);
+      }
+    }
+    ```
 
--   `employeeList` - array containing all employee objects
+```
+- Call your create function on form submit
+*Validation step: Confirm new data being added to table in Supabase*
 
-## Events (anything that happens via JS when the user interacts with your site)
+- Add in our redirects
 
--   list both triggering event and its resulting effects
+- If not logged in, redirect to auth page
+- Redirect to home after succesful insert
 
-_example:_
+5. Add your home page header with links
 
--   Submit button clicked:
-    -   Pull data from input form
-    -   Run data through `processData(data)`
-    -   Put processed data in array `processedData`
-    -   Render and display processed data on page
+---
 
-## Functions (to plan out how you'll segment things)
+##  Demo Plan
 
--   it's not necessary to specify all args! when starting out, you're just trying to figure out how you're going to segment your work
--   but! make sure to put your render and display functions here!! that's part of segementing out your program logic!!
-    -   that also keeps your event listeners clean because it'll be mostly function calls
+### HTML
 
-_example:_
+    - landing page: AUTH
+        - sign up form
+        - sign in form
+    - home page
+        - link to CREATE page
+        - button to sign out
+    - create page
+        - form to input post information
 
--   `calculateTripTime(distance)` - calculates trip time based on total trip distance
+### Events
 
-### Render Functions
+    - landing page: form submits
+    - home page: window load event
+    - create page : form submit
 
-### Display functions
+### Slices
 
-### Fetch Functions (if applicable)
-
-### Other Functions
-
-## Slices
-
-_list of JS functions and features that need to be written in order, usually because each one depends on the previous ones being usable_
-
-**example:**
-
-1. write createObject()
-2. write renderObject(), which depends on object existing
-3. write displayObject(), which depends on `renderObject()`
-4. write processObject(), which depends on object existing
-
-<!-- init commit -->
+1. signUp
+2. signIn
+3. redirects (including Signing OUT)
+4. create page
+```
