@@ -34,15 +34,46 @@ main {
     padding: 20px;
 }
 
-/* #bulletin-board {
+#bulletin-board {
     background-image: url(/assets/corkboard-bg.jpeg);
     background-size: cover;
-    width: 70%;
-    height: 50%;
+    width: 1200px;
+    height: 675px;
+    /* overflow: scroll; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    padding: 40px;
+
 }
 
 .post-it {
-    background-image: url(/assets/post-it.png);
-    width: 1200px;
-    height: 675px;
-} */
+    color: black;
+    background: pink;
+    height: 15em;
+    width: 15em;
+    padding: 1em;
+    margin: 10px;
+    box-shadow: 6px 6px 8px rgb(21, 20, 20);
+}
+
+.post-it h3 {
+    font-size: larger;
+    font-weight: bolder;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: blue;
+}
+
+.post it p {
+    font-size: large;
+    font-weight: normal;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.post-it .contact {
+    font-size: medium;
+}
