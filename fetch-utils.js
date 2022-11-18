@@ -30,3 +30,22 @@ export async function checkAuth() {
 
     if (!user) location.replace('/auth');
 }
+
+export async function createPost(post) {
+    const response = await client.from('posts').insert(post);
+
+    return response.data;
+
+}
+
+export async function redirectIfLoggedIn() {
+    if (await getUser()) {
+        location.replace('/');
+    }
+}
+
+export async function logout() {
+    await client.auth.signOut();
+
+    return (window.location.href = '/');
+}
