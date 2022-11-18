@@ -1,0 +1,45 @@
+:root {
+    font-family: sans-serif;
+}
+
+body {
+    background-color: rgb(223, 193, 150);
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-items: row;
+    align-content: center;
+}
+
+#sign-up h3,
+#sign-in h3 {
+    text-align: center;
+}
+
+.left,
+.right {
+    width: 40%;
+    margin: 5%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: inset 4px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input {
+    width: 80%;
+    margin: 5px;
+}
+
+button {
+    width: 40%;
+
+    margin: 10px;
+}
