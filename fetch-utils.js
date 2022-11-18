@@ -20,3 +20,13 @@ export async function signInUser(email, password) {
 
     return response.user;
 }
+
+export async function getUser() {
+    return client.auth.session() && client.auth.session().user;
+}
+
+export async function checkAuth() {
+    const user = await getUser();
+
+    if (!user) location.replace('/auth');
+}

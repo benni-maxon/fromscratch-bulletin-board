@@ -1,7 +1,8 @@
-import { signInUser, signUpUser } from '../fetch-utils.js';
+import { signInUser, signUpUser, redirectIfLoggedIn } from '../fetch-utils.js';
 
 const signUpForm = document.getElementById('sign-up');
 const signInForm = document.getElementById('sign-in');
+
 
 signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -9,7 +10,12 @@ signUpForm.addEventListener('submit', async (e) => {
     const email = data.get('email');
     const user = await signUpUser(email, data.get('password'));
 
-    // if (user) {}
+    if (user) {
+        redirectIfLoggedIn();
+    } else {
+        // eslint-disable-next-line no-console
+        console.error(user);
+    }
 });
 
 signInForm.addEventListener('submit', async (e) => {
@@ -18,5 +24,10 @@ signInForm.addEventListener('submit', async (e) => {
     const email = data.get('email');
     const user = await signInUser(email, data.get('password'));
 
-    // if (user) {};
+    if (user) {
+        redirectIfLoggedIn();
+    } else {
+        // eslint-disable-next-line no-console
+        console.error(user);
+    }
 });
