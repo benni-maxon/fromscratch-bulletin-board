@@ -33,3 +33,16 @@ header .logo {
 main {
     padding: 20px;
 }
+
+/* #bulletin-board {
+    background-image: url(/assets/corkboard-bg.jpeg);
+    background-size: cover;
+    width: 70%;
+    height: 50%;
+}
+
+.post-it {
+    background-image: url(/assets/post-it.png);
+    width: 1200px;
+    height: 675px;
+} */
